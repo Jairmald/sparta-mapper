@@ -225,10 +225,13 @@ def build_store(bundle: dict[str, Any], db_path: Path = DB_PATH) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--inspect", action="store_true",
-                         help="Print the STIX object schema and exit")
-    parser.add_argument("--force", action="store_true",
-                         help="Re-download the bundle instead of using the cache")
+    parser.add_argument(
+        "--inspect", action="store_true", help="Print the STIX object schema and exit"
+    )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Re-download the bundle instead of using the cache"
+    )
     args = parser.parse_args()
 
     bundle = fetch_bundle(force=args.force)

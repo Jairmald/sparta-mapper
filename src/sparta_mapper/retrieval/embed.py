@@ -64,7 +64,9 @@ def build_embeddings(force: bool = False) -> EmbeddedTechniques:
     return result
 
 
-def top_k_candidates(query_text: str, k: int = 5, force_rebuild: bool = False) -> list[tuple[Technique, float]]:
+def top_k_candidates(
+    query_text: str, k: int = 5, force_rebuild: bool = False
+) -> list[tuple[Technique, float]]:
     """Returns the k most similar techniques to query_text, with cosine
     similarity scores (higher = more similar, range -1 to 1)."""
     embedded = build_embeddings(force=force_rebuild)

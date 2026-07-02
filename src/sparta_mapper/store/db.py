@@ -53,7 +53,9 @@ def all_techniques(db_path: Path = DEFAULT_DB_PATH) -> list[Technique]:
     return [Technique(**dict(row)) for row in rows]
 
 
-def countermeasures_for(technique_stix_id: str, db_path: Path = DEFAULT_DB_PATH) -> list[Countermeasure]:
+def countermeasures_for(
+    technique_stix_id: str, db_path: Path = DEFAULT_DB_PATH
+) -> list[Countermeasure]:
     conn = _connect(db_path)
     rows = conn.execute(
         """

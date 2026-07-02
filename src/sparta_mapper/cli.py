@@ -43,7 +43,9 @@ def _fetch_cve_description(cve_id: str) -> str:
 def map(
     cve: str = typer.Option(None, help="CVE ID to look up via NVD, e.g. CVE-2023-1234"),
     text: str = typer.Option(None, help="Raw advisory/vulnerability text to classify directly"),
-    k: int = typer.Option(5, help="Number of candidate techniques to retrieve before classification"),
+    k: int = typer.Option(
+        5, help="Number of candidate techniques to retrieve before classification"
+    ),
 ):
     """Map a CVE or raw advisory text to a SPARTA technique."""
     if not cve and not text:
