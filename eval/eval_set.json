@@ -1,0 +1,23 @@
+{
+  "_README": "Hand-labeled (input_text -> expected SPARTA external_id) pairs used by eval/run_eval.py to track mapping accuracy. The two cases below are PLACEHOLDERS based on publicly described Aerospace Corp research (PCspooF, the DEF CON 32 ground-segment MITM demo) — verify the exact expected external_id against the live SPARTA matrix before trusting them, then expand this to 20-30 cases using real CVEs/advisories relevant to ground stations, bus/payload comms, and supply chain. This file is the difference between a demo and something you can defend in an interview.",
+  "cases": [
+    {
+      "id": "seed-001",
+      "input_text": "PCspooF: a malicious device on a spacecraft's Time-Triggered Ethernet (TTE) network injects synchronization protocol control frames, causing network-wide loss of synchronization and denial of communication between subsystems.",
+      "expected_external_id": "PLACEHOLDER_VERIFY_AGAINST_MATRIX",
+      "source": "Aerospace Corp SPARTA blog: 'Introducing SPARTA using PCSpooF'"
+    },
+    {
+      "id": "seed-002",
+      "input_text": "An attacker performs a man-in-the-middle attack against ground station infrastructure, intercepting and modifying command traffic before it reaches the spacecraft, exploiting the inherent trust between ground and space segments.",
+      "expected_external_id": "PLACEHOLDER_VERIFY_AGAINST_MATRIX",
+      "source": "Aerospace Corp DEF CON 32 talk: 'From Theory to Reality'"
+    },
+    {
+      "id": "seed-003",
+      "input_text": "TEMPLATE: paste a real CVE description here once you've pulled a batch from NVD for ground-segment software (e.g. search NVD for 'SCADA' + 'satellite ground station' or check CISA ICS advisories touching space/ground infrastructure).",
+      "expected_external_id": "TODO",
+      "source": "TODO"
+    }
+  ]
+}

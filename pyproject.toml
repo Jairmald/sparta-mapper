@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparta-mapper"
+version = "0.1.0"
+description = "Maps CVEs and security advisories to the SPARTA space-cyber threat framework"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[project.scripts]
+sparta-map = "sparta_mapper.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+data/sparta.db
+data/sparta_stix.json
+*.egg-info/
+.pytest_cache/
+.DS_Store
+node_modules/
+frontend/dist/
