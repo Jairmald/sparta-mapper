@@ -198,10 +198,15 @@ def build_store(bundle: dict[str, Any], db_path: Path = DB_PATH) -> None:
 
     technique_ids = {t["stix_id"] for t in techniques}
     cm_ids = {c["stix_id"] for c in countermeasures}
+    # SPARTA does not use "mitigates"; countermeasure->technique links are
+    # generic "related-to" edges (course-of-action source, attack-pattern
+    # target). The direction filter below (cm source, technique target) is
+    # what keeps this from over-linking, since "related-to" is also used for
+    # technique<->subtechnique and countermeasure<->countermeasure edges.
     links = [
         (r["source_ref"], r["target_ref"])
         for r in relationships
-        if r["relationship_type"] == "mitigates"
+        if r["relationship_type"] == "related-to"
         and r["source_ref"] in cm_ids
         and r["target_ref"] in technique_ids
     ]
