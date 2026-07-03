@@ -132,7 +132,9 @@ def _extract_countermeasures(objects: list[dict[str, Any]]) -> list[dict[str, An
 
 
 def _extract_relationships(objects: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """'mitigates' relationships link course-of-action -> attack-pattern."""
+    """Captures every relationship edge (type, source, target). SPARTA links
+    countermeasures to techniques with 'related-to' (course-of-action ->
+    attack-pattern), not 'mitigates'; build_store applies that filter."""
     rels = []
     for obj in objects:
         if obj.get("type") != "relationship":

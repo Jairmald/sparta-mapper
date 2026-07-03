@@ -3,8 +3,9 @@ __pycache__/
 .venv/
 venv/
 .env
-data/sparta.db
-data/sparta_stix.json
+# Everything in data/ is regenerable (STIX bundle, SQLite store, embedding
+# cache) — rebuild it with the STIX loader, never commit it.
+data/
 *.egg-info/
 .pytest_cache/
 .DS_Store
