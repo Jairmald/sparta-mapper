@@ -2,41 +2,15 @@
 
 from __future__ import annotations
 
-import os
-
-import requests
 import typer
 from dotenv import load_dotenv
 
 from sparta_mapper.classify.classifier import map_text
+from sparta_mapper.nvd import CVENotFoundError, fetch_cve_description
 
 load_dotenv()
 
 app = typer.Typer(add_completion=False)
-
-NVD_API_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
-
-
-def _fetch_cve_description(cve_id: str) -> str:
-    """Pull the description for a CVE from NVD's free public API."""
-    headers = {}
-    api_key = os.environ.get("NVD_API_KEY")
-    if api_key:
-        headers["apiKey"] = api_key
-
-    resp = requests.get(
-        NVD_API_URL, params={"cveId": cve_id}, headers=headers, timeout=15
-    )
-    resp.raise_for_status()
-    data = resp.json()
-
-    vulnerabilities = data.get("vulnerabilities", [])
-    if not vulnerabilities:
-        raise typer.BadParameter(f"No NVD record found for {cve_id}")
-
-    descriptions = vulnerabilities[0]["cve"]["descriptions"]
-    english = next((d["value"] for d in descriptions if d["lang"] == "en"), None)
-    return english or descriptions[0]["value"]
 
 
 @app.command()
@@ -53,7 +27,10 @@ def map(
 
     if cve:
         typer.echo(f"Fetching {cve} from NVD...")
-        input_text = _fetch_cve_description(cve)
+        try:
+            input_text = fetch_cve_description(cve)
+        except CVENotFoundError as e:
+            raise typer.BadParameter(str(e)) from e
         typer.echo(f"Description: {input_text}\n")
     else:
         input_text = text
