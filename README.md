@@ -63,6 +63,13 @@ python -m sparta_mapper.ingest.stix_loader   # builds data/sparta.db
 sparta-map --text "Unauthenticated telnet access to ground station..."
 ```
 
+> **Note:** `data/` is git-ignored and never committed — the SPARTA STIX
+> bundle, the SQLite store, and the embedding cache are all regenerable. On a
+> fresh clone this directory won't exist yet, so run the loader command above
+> to build your own `data/sparta.db` before running the CLI. (The loader pulls
+> the live bundle from sparta.aerospace.org, so the data always reflects the
+> current SPARTA release.)
+
 ## Roadmap
 
 - [x] Repo scaffold
